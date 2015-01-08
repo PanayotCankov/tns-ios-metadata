@@ -30,7 +30,7 @@ namespace tns {
         template <class Visitor>
         void visit(Visitor* visitor) {
             static IndexerCallbacks indexerCallbacks = {
-                .indexDeclaration = tns::VisitAction::declaration<Visitor>,
+                .indexDeclaration = tns::VisitAction::declaration<Visitor>
             };
             clang_indexTranslationUnit(action, visitor, &indexerCallbacks, sizeof(indexerCallbacks), CXIndexOpt_SuppressWarnings, this->parser->translationUnit);
         }

@@ -26,6 +26,16 @@ namespace tns {
         const char* name() const { return this->declaration->entityInfo->name; }
         const String usr() const { return String(clang_getCursorUSR(this->declaration->cursor)); }
         const String containerUsr() const { return String(clang_getCursorUSR(this->declaration->semanticContainer->cursor)); }
+        const String module() const {
+            CXSourceLocation location = clang_getCursorLocation(this->declaration->cursor);
+            CXFile file;
+            unsigned l, c, o;
+            clang_getFileLocation(location, &file, &l, &c, &o);
+            CXTranslationUnit translationUnit = clang_Cursor_getTranslationUnit(this->declaration->cursor);
+            CXModule module = clang_getModuleForFile(translationUnit, file);
+            CXString name = clang_Module_getFullName(module);
+            return String(name);
+        }
     };
 
     class StructDecl : public Decl {

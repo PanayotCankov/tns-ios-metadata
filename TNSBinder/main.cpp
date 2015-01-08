@@ -220,7 +220,7 @@ public:
             std::cout << " : " << interface.superName();
         }
         outputProtocols(interface.protocols());
-
+        std::cout << " module: " << interface.module();
         std::cout << std::endl;
     }
 
@@ -258,11 +258,19 @@ const char * args[] = {
     "-v",
     "-x",
     "objective-c",
-    // "-arch", "armv7",
-    "-arch", "i386",
+    "-arch", "armv7",
+    //"-arch", "i386",
     "-target", "arm-apple-darwin",
     "-std=gnu99",
     "-miphoneos-version-min=7.0",
+
+    // "-fmodules",
+
+    "-fmodule-maps",
+    "-fmodule-map-file=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/include/module.map",
+    "-fmodule-map-file=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/dispatch/module.map",
+    "-I", "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/include/objc",
+
     "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk"
 };
 
